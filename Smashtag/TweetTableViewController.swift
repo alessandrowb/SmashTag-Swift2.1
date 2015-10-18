@@ -14,8 +14,8 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         static let StartingSearch = "#terrabattle"
     }
     
-    var tweets = [[Tweet]]()
-    var searchText :String? = DefaultSearch.StartingSearch {
+    private var tweets = [[Tweet]]()
+    private var searchText :String? = DefaultSearch.StartingSearch {
         didSet {
             if searchText == "" || searchText == nil {
                 searchText = DefaultSearch.StartingSearch
@@ -56,7 +56,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         }
     }
     
-    func refresh() {
+    private func refresh() {
         if refreshControl != nil {
             refreshControl?.beginRefreshing()
         }
