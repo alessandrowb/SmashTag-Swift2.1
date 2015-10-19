@@ -8,18 +8,18 @@
 
 import UIKit
 
+public struct TweetTextColors {
+    static let hashtagColor = UIColor.greenColor()
+    static let urlColor = UIColor.blueColor()
+    static let userColor = UIColor.orangeColor()
+}
+
 class TweetTableViewCell: UITableViewCell {
     
     var tweet: Tweet? {
         didSet {
             updateUI()
         }
-    }
-    
-    private struct TweetTextColors {
-        static let hashtagColor = UIColor.greenColor()
-        static let urlColor = UIColor.blueColor()
-        static let userColor = UIColor.orangeColor()
     }
     
     @IBOutlet weak var tweetProfileImageView: UIImageView!
@@ -44,7 +44,6 @@ class TweetTableViewCell: UITableViewCell {
     }
     
     // MARK: - TweetCellContent
-    
     private func setTweetTextLabel(tweet: Tweet) {
         var tweetText: String = tweet.text
         for _ in tweet.media {tweetText += " 📷"}

@@ -83,6 +83,7 @@
                                     <outlet property="tweetProfileImageView" destination="RnT-os-fl5" id="iVs-L5-Vn0"/>
                                     <outlet property="tweetScreenNameLabel" destination="K21-cc-T6I" id="pgQ-Tg-yyn"/>
                                     <outlet property="tweetTextLabel" destination="Yzp-NO-nhg" id="Z9n-Oo-FN8"/>
+                                    <segue destination="aoc-x9-0xr" kind="show" identifier="showContent" id="IiJ-GI-8Ib"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -105,7 +106,69 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9rL-VH-D1i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="461" y="-128"/>
+            <point key="canvasLocation" x="30" y="-383"/>
+        </scene>
+        <!--Content Table View Controller-->
+        <scene sceneID="A4r-Yf-MH5">
+            <objects>
+                <tableViewController id="aoc-x9-0xr" customClass="ContentTableViewController" customModule="Smashtag" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="292" sectionHeaderHeight="28" sectionFooterHeight="28" id="qxo-Tn-082">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TweetContent" rowHeight="292" id="g9d-FX-E2K" customClass="ContentTableViewCell" customModule="Smashtag" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="600" height="292"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="g9d-FX-E2K" id="F75-pP-u41">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="291"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="R1T-VM-Tcw">
+                                            <rect key="frame" x="290" y="136" width="20" height="20"/>
+                                            <animations/>
+                                        </activityIndicatorView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yXM-aO-1sU">
+                                            <rect key="frame" x="8" y="8" width="584" height="275"/>
+                                            <animations/>
+                                        </imageView>
+                                    </subviews>
+                                    <animations/>
+                                    <constraints>
+                                        <constraint firstItem="R1T-VM-Tcw" firstAttribute="centerX" secondItem="F75-pP-u41" secondAttribute="centerX" id="5PU-x5-Yoj"/>
+                                        <constraint firstAttribute="topMargin" secondItem="yXM-aO-1sU" secondAttribute="top" id="5we-rJ-Set"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="yXM-aO-1sU" secondAttribute="bottom" id="73I-dE-g8T"/>
+                                        <constraint firstAttribute="leadingMargin" secondItem="yXM-aO-1sU" secondAttribute="leading" id="7Af-kT-pHL"/>
+                                        <constraint firstItem="R1T-VM-Tcw" firstAttribute="leading" secondItem="F75-pP-u41" secondAttribute="leadingMargin" constant="282" id="P34-uI-Uen"/>
+                                        <constraint firstItem="R1T-VM-Tcw" firstAttribute="centerY" secondItem="F75-pP-u41" secondAttribute="centerY" id="PTx-dV-LHI"/>
+                                        <constraint firstAttribute="leadingMargin" secondItem="yXM-aO-1sU" secondAttribute="leading" id="bHm-RG-Rei"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="yXM-aO-1sU" secondAttribute="trailing" id="eff-rx-Sif"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="R1T-VM-Tcw" secondAttribute="trailing" constant="282" id="ySs-fA-Sen"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="P34-uI-Uen"/>
+                                            <exclude reference="ySs-fA-Sen"/>
+                                        </mask>
+                                    </variation>
+                                </tableViewCellContentView>
+                                <animations/>
+                                <connections>
+                                    <outlet property="contentImage" destination="yXM-aO-1sU" id="AXW-1p-XkX"/>
+                                    <outlet property="refresher" destination="R1T-VM-Tcw" id="Ush-8F-iN4"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="aoc-x9-0xr" id="b8M-CF-eZT"/>
+                            <outlet property="delegate" destination="aoc-x9-0xr" id="Y9a-sP-F9z"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aTa-hK-1Pk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="30" y="318"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="dx6-EC-toj">
@@ -124,7 +187,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hZ1-jx-NfT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-218" y="-128"/>
+            <point key="canvasLocation" x="-649" y="-383"/>
         </scene>
     </scenes>
 </document>
