@@ -50,6 +50,10 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
+    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+        return imageView
+    }
+    
     private var imageView = UIImageView()
     private var imageWasMoved = false
     
@@ -91,10 +95,5 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
         if image == nil {
             fetchImage()
         }
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        setZoom()
     }
 }
