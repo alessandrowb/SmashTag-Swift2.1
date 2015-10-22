@@ -33,6 +33,7 @@ class ContentTableViewCell: UITableViewCell {
                             self.contentImage?.image = nil
                         }
                         self.refresher?.stopAnimating()
+                        self.refresher?.hidden = true
                     }
                 }
             }

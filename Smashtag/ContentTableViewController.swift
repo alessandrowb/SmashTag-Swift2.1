@@ -57,24 +57,26 @@ class ContentTableViewController: UITableViewController {
         var data: [String]
         var imageRatio: [Double]
     }
-
+    
     // MARK: - UITableViewDataSource
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         let sections = contents.count
         return sections
     }
-
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return contents[section].data.count
     }
-
+    
     private struct Storyboard {
-        static let CellReuseIdentifier = "TweetContent"
+        static let ImageCellReuseIdentifier = "ImageContent"
+        static let KeywordCellReuseIdentifier = "KeywordContent"
+        static let ImageCellSegueIdentifier = "showFullImage"
+        static let KeyworkCellSegueIdentifier = "performSearch"
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var thisTextColor = UIColor.blackColor()
-        let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.CellReuseIdentifier, forIndexPath: indexPath) as UITableViewCell
         switch contents[indexPath.section].title {
         case "Hashtags":
             thisTextColor = TweetTextColors.hashtagColor
@@ -82,23 +84,29 @@ class ContentTableViewController: UITableViewController {
             thisTextColor = TweetTextColors.userColor
         case "Links":
             thisTextColor = TweetTextColors.urlColor
-        case "Images":
-            let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.CellReuseIdentifier, forIndexPath: indexPath) as! ContentTableViewCell
-            let fileUrl = NSURL(string: contents[indexPath.section].data[indexPath.row])
-            cell.imageUrl = fileUrl
         default:
-            cell.textLabel?.textColor = thisTextColor
+            break
         }
         
-        cell.textLabel?.text = contents[indexPath.section].data[indexPath.row]
-        cell.textLabel?.textColor = thisTextColor
-        cell.userInteractionEnabled = false;
+        if contents[indexPath.section].title == "Images" {
+            let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.ImageCellReuseIdentifier, forIndexPath: indexPath) as! ContentTableViewCell
+            let fileUrl = NSURL(string: contents[indexPath.section].data[indexPath.row])
+            cell.imageUrl = fileUrl
+            
+            return cell
+        }
+        else {
+            let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.KeywordCellReuseIdentifier, forIndexPath: indexPath) as UITableViewCell
+            cell.textLabel?.text = contents[indexPath.section].data[indexPath.row]
+            cell.textLabel?.textColor = thisTextColor
+            
+            return cell
+        }
         
-        return cell
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-            return contents[section].title
+        return contents[section].title
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -109,5 +117,41 @@ class ContentTableViewController: UITableViewController {
             return UITableViewAutomaticDimension
         }
     }
-
+    
+    // MARK: - Navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let identifier = segue.identifier {
+            switch identifier {
+            case Storyboard.KeyworkCellSegueIdentifier:
+                if let ttvc = segue.destinationViewController as? TweetTableViewController {
+                    if let tweetCell = sender as? UITableViewCell {
+                        ttvc.searchText = tweetCell.textLabel?.text
+                    }
+                }
+            case Storyboard.ImageCellSegueIdentifier:
+                if let ivc = segue.destinationViewController as? ImageViewController {
+                    if let tweetCell = sender as? ContentTableViewCell {
+                        ivc.imageURL = tweetCell.imageUrl
+                    }
+                }
+            default:
+                break
+            }
+        }
+    }
+    
+    override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
+        if identifier == Storyboard.KeyworkCellSegueIdentifier {
+            if let cell = sender as? UITableViewCell {
+                if let url = cell.textLabel?.text {
+                    if url.hasPrefix("http") {
+                        UIApplication.sharedApplication().openURL(NSURL(string: url)!)
+                        return false
+                    }
+                }
+            }
+        }
+        return true
+    }
+    
 }

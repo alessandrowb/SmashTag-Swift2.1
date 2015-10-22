@@ -15,7 +15,8 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     }
     
     private var tweets = [[Tweet]]()
-    private var searchText :String? = DefaultSearch.StartingSearch {
+    
+    var searchText :String? = DefaultSearch.StartingSearch {
         didSet {
             if searchText == "" || searchText == nil {
                 searchText = DefaultSearch.StartingSearch
