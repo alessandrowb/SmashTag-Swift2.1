@@ -15,7 +15,7 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <textField key="tableHeaderView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Twitter Search Query" textAlignment="natural" minimumFontSize="17" id="AtU-Gh-WIV">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="30"/>
+                            <rect key="frame" x="0.0" y="64" width="600" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <animations/>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -23,7 +23,7 @@
                         </textField>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Tweet" rowHeight="166" id="0VU-H2-KcN" customClass="TweetTableViewCell" customModule="Smashtag" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="58" width="600" height="166"/>
+                                <rect key="frame" x="0.0" y="122" width="600" height="166"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0VU-H2-KcN" id="10x-Lu-Hnu">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="165"/>
@@ -117,16 +117,20 @@
                         <viewControllerLayoutGuide type="bottom" id="1YD-1p-Dnd"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="39G-mw-1r4">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="b0n-rl-xSX">
-                                <rect key="frame" x="290" y="290" width="20" height="20"/>
+                                <rect key="frame" x="290" y="258" width="20" height="20"/>
                                 <animations/>
                             </activityIndicatorView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oz0-Zv-bY7">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                                 <animations/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Ydv-nh-8mp" appends="YES" id="tEY-Io-gYc"/>
+                                </connections>
                             </scrollView>
                         </subviews>
                         <animations/>
@@ -140,12 +144,18 @@
                             <constraint firstItem="oz0-Zv-bY7" firstAttribute="top" secondItem="39G-mw-1r4" secondAttribute="top" id="TTk-Sm-2PE"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <connections>
                         <outlet property="scrollView" destination="oz0-Zv-bY7" id="emq-AR-T9p"/>
                         <outlet property="spinner" destination="b0n-rl-xSX" id="mWc-BR-AJ0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ViR-bv-CjH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer numberOfTapsRequired="2" id="Ydv-nh-8mp">
+                    <connections>
+                        <action selector="tapAction:" destination="G3b-G7-yEX" id="cPE-IQ-yMl"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-645" y="321"/>
         </scene>
@@ -160,7 +170,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ImageContent" rowHeight="292" id="g9d-FX-E2K" customClass="ContentTableViewCell" customModule="Smashtag" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="600" height="292"/>
+                                <rect key="frame" x="0.0" y="92" width="600" height="292"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="g9d-FX-E2K" id="F75-pP-u41">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="291"/>
@@ -202,7 +212,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="KeywordContent" textLabel="vBc-5A-2IX" rowHeight="110" style="IBUITableViewCellStyleDefault" id="xbT-gd-HDt" customClass="ContentTableViewCell" customModule="Smashtag" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="320" width="600" height="110"/>
+                                <rect key="frame" x="0.0" y="384" width="600" height="110"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xbT-gd-HDt" id="YOF-a5-uwD">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="109"/>
@@ -213,7 +223,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -256,6 +266,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="0Pg-RA-r6f"/>
+        <segue reference="zeV-B2-SsH"/>
     </inferredMetricsTieBreakers>
 </document>

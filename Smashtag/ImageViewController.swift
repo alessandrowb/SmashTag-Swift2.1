@@ -46,19 +46,34 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
             scrollView.contentSize = imageView.frame.size
             scrollView.delegate = self
             scrollView.minimumZoomScale = 0.03
-            scrollView.maximumZoomScale = 1.0
+            scrollView.maximumZoomScale = 6.0
         }
+    }
+    
+    @IBAction func tapAction(sender: UITapGestureRecognizer) {
+        imageWasMoved = false
+        setZoom()
     }
     
     func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
         return imageView
     }
     
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        imageWasMoved = true
+    }
+    
+    func scrollViewDidZoom(scrollView: UIScrollView) {
+        imageWasMoved = true
+    }
+    
     private var imageView = UIImageView()
     private var imageWasMoved = false
     
     private var image: UIImage? {
-        get { return imageView.image }
+        get {
+            return imageView.image
+        }
         set {
             imageView.image = newValue
             imageView.sizeToFit()
